@@ -1,14 +1,15 @@
-Aula 1 — Introdução ao R
-========================================================
-author: Wilson Freitas
+---
+title: "Introdução ao R"
+author: "Wilson Freitas"
+output:
+  ioslides_presentation:
+    smaller: true
+    widescreen: true
+---
 
-O que é o R?
-========================================================
-type: sub-section
+# O que é o R?
 
-O que é o R?
-========================================================
-title: false
+## O que é o R?
 
 R é um ambiente integrado para análise de dados e criação de visualização computacional, que oferece entre outras coisas:
 
@@ -17,9 +18,7 @@ R é um ambiente integrado para análise de dados e criação de visualização 
 - diversas funcionalidades para a criação de gráficos
 - uma linguagem de programação orientada a objetos que pode facilmente ser extendida pela comunidade e integrada com outras linguagens
 
-Uma olhadinha no R
-========================================================
-incremental: true
+## Uma olhadinha no R
 
 
 ```r
@@ -38,9 +37,7 @@ sqrt(3/4)/(1/3 - 2/pi^2)
 [1] 6.626513
 ```
 
-Uma olhadinha no R
-========================================================
-incremental: true
+## Uma olhadinha no R
 
 
 ```r
@@ -61,8 +58,7 @@ m/sqrt(v)
 [1] 3.958487
 ```
 
-Pedindo ajuda
-========================================================
+## Pedindo ajuda
 
 
 ```r
@@ -73,12 +69,9 @@ help("[")
 ```
 
 
-A linguagem R
-========================================================
-type: sub-section
+# A linguagem R
 
-Características da linguagem
-========================================================
+## Características da linguagem
 
 - A linguagem R é uma linguagem de manipulação de objetos com diversas características de programação funcional
 - Todas as entidades em R são objetos
@@ -89,8 +82,7 @@ Características da linguagem
   - administração de memória
   - interfaces com outras linguagens: C/C++, Java, Python, ...
 
-Convenção de nomes
-==================
+## Convenção de nomes
 
 Nomes para objetos no R seguem as seguintes regras:
 
@@ -102,8 +94,7 @@ Nomes para objetos no R seguem as seguintes regras:
 
 Recomendo dar uma olhada no *style guide* do Hadley Wickham http://r-pkgs.had.co.nz/style.html
 
-Convenção de nomes
-==================
+## Convenção de nomes
 
 - Nomes fora do padrão podem ser utilizados entre crases ou aspas
 
@@ -125,20 +116,16 @@ function(x, val) structure(x, value=val)
 function (e1, e2)  .Primitive("+")
 ```
 
-Outras características
-======================
+## Outras características
 
 - O código R é formado por comandos que são expressões ou atribuições
 - Os comandos são separados por `new-line` ou `;`
 - Qualquer código em uma linha após `#` é tratado como comentário
 
 
-Ambiente R
-==========
-type: sub-section
+# Ambiente R
 
-Criando variáveis (1)
-=====================
+## Criando variáveis (1)
 
 Variáveis são criadas atribuindo valores com o operador `<-`
 
@@ -158,8 +145,7 @@ ls()
 [1] "a"      "m"      "repl<-" "v"     
 ```
 
-Criando Variáveis (2)
-=====================
+## Criando Variáveis (2)
 
 A atribuição também pode ser feita com `=`
 
@@ -183,8 +169,7 @@ b <- a <- 5
 5 -> a -> b
 ```
 
-Removendo variáveis
-=================
+## Removendo variáveis
 
 `rm` remove
 
@@ -206,8 +191,7 @@ ls()
 [1] "b"      "m"      "repl<-" "v"     
 ```
 
-Variáveis ocultas
-=================
+## Variáveis ocultas
 
 Variáveis que iniciam com `.` são ocultas
 
@@ -229,8 +213,7 @@ ls(all.names=TRUE)
 [1] ".First" ".hid"   "b"      "m"      "repl<-" "v"     
 ```
 
-Limpando o Ambiente
-===================
+## Limpando o Ambiente
 
 Para limpar o ambiente `rm(list=ls())`
 
@@ -256,8 +239,7 @@ ls(all.names=TRUE)
 character(0)
 ```
 
-Investigando variáveis (1)
-==========================
+## Investigando variáveis (1)
 
 Como o R executa um *shell* interativo, uma forma de investigar variáveis é imprimindo as
 
@@ -281,8 +263,7 @@ UseMethod("print")
 <environment: namespace:base>
 ```
 
-Investigando variáveis (2)
-==========================
+## Investigando variáveis (2)
 
 Imprimir funções em R retorna o código
 
@@ -414,8 +395,7 @@ function (f, interval, ..., lower = min(interval), upper = max(interval),
 <environment: namespace:stats>
 ```
 
-Investigando variáveis (3)
-==========================
+## Investigando variáveis (3)
 
 Outra forma de investigar as variáveis é com a função `str`
 
@@ -436,8 +416,7 @@ str(print)
 function (x, ...)  
 ```
 
-Investigando variáveis (4)
-==========================
+## Investigando variáveis (4)
 
 Para investigar funções a função `args`
 
@@ -460,8 +439,7 @@ function (x, na.rm = FALSE)
 NULL
 ```
 
-Onde é que eu estou?
-====================
+## Onde é que eu estou?
 
 A partir do instante em que foi incializado o R está no *working directory* (`wd`) e para descobri-lo use `getwd`:
 
