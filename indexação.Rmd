@@ -68,9 +68,31 @@ quad[even]
 ```
 
 
+## Indexação com boleanos—Exemplo {.smaller}
+
+```{r}
+sd(v <- rnorm(1000))
+sd(vp <- v[(v > quantile(v, 0.05)) & (v < quantile(v, 0.95))])
+```
+
+```{r, echo=FALSE, fig.height=3}
+plot(v, sample(v), col='blue')
+points(vp, sample(vp), col='red')
+```
+
+
 ## Indexação com boleanos
 
 - O comprimento do vetor `logical` passado para o operador `[` deve ter o mesmo comprimento do vetor (como no slide anterior)
     - se o comprimento for menor a regra de reciclagem será aplicada
     - se o comprimento for maior os elementos excedentes serão ignorados
 
+
+## Regra de reciclagem
+
+## Funções que ajudam na indexação
+
+- match
+- which
+- which.min e which.max
+- findInterval
