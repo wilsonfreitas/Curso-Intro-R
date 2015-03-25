@@ -5,7 +5,6 @@ output:
   ioslides_presentation:
     smaller: true
     widescreen: true
-
 ---
 
 # Tudo é Objeto
@@ -50,18 +49,23 @@ class(as.Date('2000-01-01'))
 São os tipos que podem ser criados pelos usuários para adicionar funcionalidades ao R.
 
 
-# Estruturas de dados
+# Estruturas de dados: Vetores
 
 ## Vetores
 
-* É a estrutura de dados mais comum utilizada no R e podem ser criados de diversas formas:
+* É a estrutura de dados mais atômica no R
 
 ```{r}
 1:3
-c(1, 2, 3)
-vector('numeric', 3)
-numeric(3)
+c(1, 2, 3) # função de concatenação **curinga**
 ```
+
+* Não há escalares no R
+
+```{r}
+is.vector(1)
+```
+
 
 ## Vetores
 
@@ -71,7 +75,7 @@ numeric(3)
 ```{r}
 vector('character', 10)
 vector('numeric', 10)
-vector('list', 3)
+vector('list', 2)
 ```
 
 
@@ -125,7 +129,7 @@ mode(v[2])
 
 ## Propriedades dos Vetores
 
-### Vetores possuem comprimento
+### Vetores possuem comprimento (função `length`)
 
 ```{r}
 length(1:4)
@@ -133,4 +137,210 @@ length(5)
 length(integer(0))
 ```
 
+## Propriedades dos Vetores
+
+### Indexação
+
+* Vetores podem ser indexados por posição
+
+```{r}
+v <- c(21, 42, 63)
+v[1]
+v[3]
+```
+
+## Propriedades dos Vetores
+
+### Indexação
+
+* Vetores podem ser indexados por vetores de índices
+
+```{r}
+v[c(2, 3)]
+v[c(3, 1, 2)]
+```
+
+
+## Propriedades dos Vetores
+
+### Indexação
+
+* Vetores podem ser indexados por vetores de `logical`
+
+```{r}
+v[c(TRUE, FALSE, TRUE)]
+```
+
+
+## Propriedades dos Vetores
+
+### Indexação
+
+* Índices negativos retornam o vetor sem o elemento indexado
+
+```{r}
+v[-2]
+v[c(-1, -3)]
+```
+
+* Não pode misturar índices negativos e positivos
+
+## Propriedades dos Vetores
+
+### Vetores possuem nomes (função `names`)
+
+```{r}
+(v <- c(21, 42, 63))
+names(v)
+names(v) <- c("1M", "2M", "3M")
+v
+```
+
+## Propriedades dos Vetores
+
+* Com elementos nomeados, o vetor pode ser indexado pelos nomes
+
+```{r}
+v["2M"]
+v[c("1M", "3M")]
+```
+
+
+## Propriedades dos Vetores
+
+* Indexação de elementos que não existem retorna `NA`
+
+```{r}
+(v <- 1:10)
+v[11]
+```
+
+* Atribuição de elementos fora do índices cria elementos `NA`
+
+```{r}
+v[20] <- 2
+v
+```
+
+
+## Propriedades dos Vetores
+
+* Podemos concatenar elementos a um vetor com a função `c`
+
+```{r}
+v <- 1:5
+c(v, 1:3, -1, 15:22)
+```
+
+# Estruturas de dados: Listas
+
+## Listas
+
+### Listas são heterogêneas
+
+* Listas podem acomodar objetos de diferentes tipos
+
+```{r}
+(cid <- list("Wilson Freitas", 38, as.Date('1976-07-12')))
+```
+
+## Listas
+
+### Listas também possuem nomes
+
+```{r}
+names(cid)
+names(cid) <- c("nome", "idade", "nascimento")
+cid
+```
+
+## Listas
+
+* Listas podem ser criadas diretamente com nomes
+
+```{r}
+list(nome="Wilson Freitas", idade=38, nascimento=as.Date('1976-07-12'))
+```
+
+## Listas
+
+### Indexação
+
+* Listas podem ser indexadas por posição e vetores de índices
+
+```{r}
+cid[1]
+cid[c(2, 3)]
+```
+
+## Listas
+
+### Indexação
+
+* Listas podem ser indexadas por nomes
+
+```{r}
+cid['nome']
+cid[c('idade', 'nascimento')]
+```
+
+## Listas
+
+* O operador de indexação `[` de uma lista, retorna uma sublista
+
+```{r}
+nome <- cid['nome']
+is.list(nome)
+```
+
+* Para acessar o conteúdo do elemento de uma lista devemos usar o operador `[[` ou `$`
+
+```{r}
+cid[['nome']]
+cid$nome
+```
+
+* O operador `[[` não aceita múltiplos índices.
+
+## Listas
+
+* Podemos adicionar elementos a uma lista
+
+```{r}
+cid$sapato <- 42
+cid[['casado']] <- TRUE
+cid
+```
+
+
+## Listas
+
+* Podemos concatenar uma elementos a uma lista sem alterá-la com a função `c`
+
+```{r}
+c(cid, filhos=2, paciência=0)
+```
+
+
+## A função `c`
+
+* Ela combina valores em um vetor ou uma lista
+    * Para valores homogêneos ela retorna um vetor
+    * Para valores heterogêneos ela segue uma regra de precedência para coerção:
+
+```
+NULL < raw < logical < integer < double < complex < character < list < expression
+```
+
+```{r}
+c(TRUE, FALSE, 10)
+c(TRUE, FALSE, 10, 1i)
+c(TRUE, FALSE, 10, 1i, "n")
+```
+
+## A função `c`
+
+```{r}
+c(TRUE, FALSE, 10, 1i, "n", list(5))
+```
 

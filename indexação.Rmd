@@ -1,0 +1,76 @@
+---
+title: "Indexação no R"
+author: "Wilson Freitas"
+output: ioslides_presentation
+---
+
+## Introdução
+
+A indexação no R é realizada com o operador `[` que aceita:
+
+- `numeric` (que são convertidos para `integer`)
+    - podem ser positivos ou negativos
+- `logical`
+
+O foco é na indexação de vetores, em 1 dimensão, mas as operações podem ser aplicadas a objetos com mais dimensões.
+
+Nos exemplos vamos utilizar o vetor `quad` de quadrados perfeitos.
+
+```{r}
+(quad <- (1:9)^2)
+```
+
+
+## Indexação simples
+
+- A indexação com `numeric` é a indexação por posição
+- O `numeric` passado ao operador `[` identifica a posição do vetor
+- A posição do primeiro elemento de um vetor é 1, <span class="red">**não há elemento 0 em R**</span>
+
+```{r}
+quad[1] # primeiro elemento do vetor
+quad[2] # segundo elemento do vetor
+```
+
+
+## Indexação múltipla
+
+- Dado que os valores `numeric` indicam a posição dos elementos no vetor, passando diversas posições retorna diversos elementos
+
+```{r}
+quad[c(1,3,5,7,9)]
+quad[3:7]
+```
+
+## Indexação negativa
+
+- O operador `[` aceita valores negativos
+- Valores negativos invertem a seleção, ou seja, seleciona todos exceto os valores negativos
+- O operador `[` aceita todos os valores negativos ou positivos
+- Não é possível misturar valores positivos e negativos
+
+```{r}
+quad[-2]
+quad[-c(1,3,5,7,9)]
+```
+
+
+## Indexação com boleanos {.smaller}
+
+- O operador `[` aceita valores `logical`
+- `TRUE` seleciona os elementos e `FALSE` ignora
+
+```{r}
+(lt.25 <- quad < 25)
+quad[lt.25]
+(even <- quad %% 2 == 0)
+quad[even]
+```
+
+
+## Indexação com boleanos
+
+- O comprimento do vetor `logical` passado para o operador `[` deve ter o mesmo comprimento do vetor (como no slide anterior)
+    - se o comprimento for menor a regra de reciclagem será aplicada
+    - se o comprimento for maior os elementos excedentes serão ignorados
+

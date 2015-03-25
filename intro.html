@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tipos de dados em R</title>
+  <title>Introdução ao R</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,7 +25,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Tipos de dados em R',
+                title: 'Introdução ao R',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -91,565 +91,353 @@
           </hgroup>
   </slide>
 
-<slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Tudo é Objeto</h2></hgroup><article  id="tudo-e-objeto" class="smaller ">
+<slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>O que é o R?</h2></hgroup><article  id="o-que-e-o-r" class="smaller ">
 
-</article></slide><slide class=''><hgroup><h2>Objetos</h2></hgroup><article  id="objetos" class="smaller ">
+</article></slide><slide class=''><hgroup><h2>O que é o R?</h2></hgroup><article  id="o-que-e-o-r-1" class="smaller ">
 
-<p>Tudo, absolutamente tudo, no R é objeto</p>
-
-<h3>Tipos de Objetos</h3>
-
-<p>Os objetos possuem tipos físicos e tipos abstratos:</p>
+<p>R é um ambiente integrado para análise de dados e criação de visualização computacional, que oferece entre outras coisas:</p>
 
 <ul>
-<li>tipos físicos: tipo que indica como o objeto é armazenado na memória
-
-<ul>
-<li>retornado pela função <code>mode</code></li>
-</ul></li>
-<li>tipos abstratos: tipo que define o comportamento do objeto
-
-<ul>
-<li>retornado pela função <code>class</code></li>
-</ul></li>
+<li>uma grande coleção de pacotes para estatística e análise de dados</li>
+<li>uma linguagem para expressar modelos estatísticos e ferramentas para desenvolver modelos lineares e não lineares</li>
+<li>diversas funcionalidades para a criação de gráficos</li>
+<li>uma linguagem de programação orientada a objetos que pode facilmente ser extendida pela comunidade e integrada com outras linguagens</li>
 </ul>
 
-<h3>Tipos Atômicos</h3>
+</article></slide><slide class=''><hgroup><h2>Uma olhadinha no R</h2></hgroup><article  id="uma-olhadinha-no-r" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>2+3</pre>
+
+<pre >[1] 5</pre>
+
+<pre class = 'prettyprint lang-r'>sqrt(3/4)/(1/3 - 2/pi^2)</pre>
+
+<pre >[1] 6.626513</pre>
+
+</article></slide><slide class=''><hgroup><h2>Uma olhadinha no R</h2></hgroup><article  id="uma-olhadinha-no-r-1" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>library(MASS)
+mean(chem)</pre>
+
+<pre >[1] 4.280417</pre>
+
+<pre class = 'prettyprint lang-r'>m &lt;- mean(chem); v &lt;- var(chem)/length(chem)
+m/sqrt(v)</pre>
+
+<pre >[1] 3.958487</pre>
+
+</article></slide><slide class=''><hgroup><h2>Pedindo ajuda</h2></hgroup><article  id="pedindo-ajuda" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>help(mean)
+?mean
+help(&quot;[&quot;)
+?&quot;[&quot;</pre>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>A linguagem R</h2></hgroup><article  id="a-linguagem-r" class="smaller ">
+
+</article></slide><slide class=''><hgroup><h2>Características da linguagem</h2></hgroup><article  id="caracteristicas-da-linguagem" class="smaller ">
 
 <ul>
-<li>São os tipos (<code>mode</code>) mais fundamentais mais fundamentais do R:
-
-<ul>
-<li><code>numeric</code> (ou <code>double</code>), <code>complex</code>, <code>logical</code>, <code>character</code>, <code>integer</code>, <code>raw</code> (<em>raw bytes</em>)</li>
-</ul></li>
+<li>A linguagem R é uma linguagem de manipulação de objetos com diversas características de programação funcional</li>
+<li>Todas as entidades em R são objetos</li>
+<li>R é uma linguagem interativa (pode ser executada através de um prompt) assim como uma linguagem de uso geral com:</li>
+<li>IO: arquivos, Internet, bancos de dados</li>
+<li>estruturas de dados: <code>list</code>, <code>vector</code>, <code>matrix</code>, &#8230;</li>
+<li>estruturas de controle: if, else, while, for, &#8230;</li>
+<li>administração de memória</li>
+<li>interfaces com outras linguagens: C/C++, Java, Python, &#8230;</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Tipos Físicos</h2></hgroup><article  id="tipos-fisicos" class="smaller ">
+</article></slide><slide class=''><hgroup><h2>Convenção de nomes</h2></hgroup><article  id="convencao-de-nomes" class="smaller ">
 
-<pre class = 'prettyprint lang-r'>c(mode(0), mode(&quot;&quot;), mode(list()), mode(c), mode(TRUE))</pre>
-
-<pre >## [1] &quot;numeric&quot;   &quot;character&quot; &quot;list&quot;      &quot;function&quot;  &quot;logical&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>mode(data.frame(a=2, b=3))</pre>
-
-<pre >## [1] &quot;list&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>mode(as.Date(&#39;2000-01-01&#39;))</pre>
-
-<pre >## [1] &quot;numeric&quot;</pre>
-
-<p>Os mais comuns são: <code>numeric</code>, <code>character</code>, <code>list</code>, <code>function</code>, <code>logical</code>, mas existem outros.</p>
-
-</article></slide><slide class=''><hgroup><h2>Tipos Abstratos</h2></hgroup><article  id="tipos-abstratos" class="smaller ">
-
-<pre class = 'prettyprint lang-r'>c(class(0), class(&quot;&quot;), class(list()), class(c), class(TRUE))</pre>
-
-<pre >## [1] &quot;numeric&quot;   &quot;character&quot; &quot;list&quot;      &quot;function&quot;  &quot;logical&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>class(data.frame(a=2, b=3))</pre>
-
-<pre >## [1] &quot;data.frame&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>class(as.Date(&#39;2000-01-01&#39;))</pre>
-
-<pre >## [1] &quot;Date&quot;</pre>
-
-<p>São os tipos que podem ser criados pelos usuários para adicionar funcionalidades ao R.</p>
-
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Estruturas de dados: Vetores</h2></hgroup><article  id="estruturas-de-dados-vetores" class="smaller ">
-
-</article></slide><slide class=''><hgroup><h2>Vetores</h2></hgroup><article  id="vetores" class="smaller ">
+<p>Nomes para objetos no R seguem as seguintes regras:</p>
 
 <ul>
-<li>É a estrutura de dados mais atômica no R</li>
+<li>são <em>case sensitive</em>: <code>abc</code> é diferente de <code>Abc</code></li>
+<li>Nomes são formados por: letras, números, <code>.</code> e <code>_</code></li>
+<li>Nomes não podem iniciar com: números, <code>_</code></li>
+<li>Nomes podem inciar com <code>.</code> apenas quando forem seguidos de letras, nomes com <code>.42</code> são números decimais</li>
+<li>O <code>.</code> é importante na convenção de nomes para a criação de objetos (<em>veremos mais adiante</em>)</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>1:3</pre>
+<p>Recomendo dar uma olhada no <em>style guide</em> do Hadley Wickham <a href='http://r-pkgs.had.co.nz/style.html' title=''>http://r-pkgs.had.co.nz/style.html</a></p>
 
-<pre >## [1] 1 2 3</pre>
-
-<pre class = 'prettyprint lang-r'>c(1, 2, 3) # função de concatenação **curinga**</pre>
-
-<pre >## [1] 1 2 3</pre>
+</article></slide><slide class=''><hgroup><h2>Convenção de nomes</h2></hgroup><article  id="convencao-de-nomes-1" class="smaller ">
 
 <ul>
-<li>Não há escalares no R</li>
+<li>Nomes fora do padrão podem ser utilizados entre crases ou aspas</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>is.vector(1)</pre>
+<pre class = 'prettyprint lang-r'>&quot;repl&lt;-&quot; &lt;- function(x, val) structure(x, value=val)
+`repl&lt;-`</pre>
 
-<pre >## [1] TRUE</pre>
+<pre >function(x, val) structure(x, value=val)</pre>
 
-</article></slide><slide class=''><hgroup><h2>Vetores</h2></hgroup><article  id="vetores-1" class="smaller ">
+<pre class = 'prettyprint lang-r'>`+`</pre>
+
+<pre >function (e1, e2)  .Primitive(&quot;+&quot;)</pre>
+
+</article></slide><slide class=''><hgroup><h2>Outras características</h2></hgroup><article  id="outras-caracteristicas" class="smaller ">
 
 <ul>
-<li>A função <code>vector(mode=&quot;logical&quot;, length=0)</code> cria vetores</li>
-<li><code>mode</code> pode ser um tipo atômico, <code>list</code> ou <code>expression</code></li>
+<li>O código R é formado por comandos que são expressões ou atribuições</li>
+<li>Os comandos são separados por <code>new-line</code> ou <code>;</code></li>
+<li>Qualquer código em uma linha após <code>#</code> é tratado como comentário</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>vector(&#39;character&#39;, 10)</pre>
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Ambiente R</h2></hgroup><article  id="ambiente-r" class="smaller ">
 
-<pre >##  [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</pre>
+</article></slide><slide class=''><hgroup><h2>Criando variáveis (1)</h2></hgroup><article  id="criando-variaveis-1" class="smaller ">
 
-<pre class = 'prettyprint lang-r'>vector(&#39;numeric&#39;, 10)</pre>
+<p>Variáveis são criadas atribuindo valores com o operador <code>&lt;-</code></p>
 
-<pre >##  [1] 0 0 0 0 0 0 0 0 0 0</pre>
+<pre class = 'prettyprint lang-r'>a &lt;- 1</pre>
 
-<pre class = 'prettyprint lang-r'>vector(&#39;list&#39;, 2)</pre>
+<p><code>ls</code> lista as variáveis criadas no ambiente</p>
 
-<pre >## [[1]]
-## NULL
-## 
-## [[2]]
-## NULL</pre>
+<pre class = 'prettyprint lang-r'>ls()</pre>
 
-</article></slide><slide class=''><hgroup><h2>Vetores</h2></hgroup><article  id="vetores-2" class="smaller ">
+<pre >[1] &quot;a&quot;      &quot;m&quot;      &quot;repl&lt;-&quot; &quot;v&quot;     </pre>
 
-<ul>
-<li>É possível criar vetores de comprimento 0 (<code>length=0</code>)</li>
-</ul>
+</article></slide><slide class=''><hgroup><h2>Criando Variáveis (2)</h2></hgroup><article  id="criando-variaveis-2" class="smaller ">
 
-<pre class = 'prettyprint lang-r'>vector(&#39;integer&#39;)</pre>
+<p>A atribuição também pode ser feita com <code>=</code></p>
 
-<pre >## integer(0)</pre>
+<pre class = 'prettyprint lang-r'>b = 2</pre>
 
-<pre class = 'prettyprint lang-r'>vector(&#39;logical&#39;)</pre>
+<p>e também com o operador <code>-&gt;</code></p>
 
-<pre >## logical(0)</pre>
+<pre class = 'prettyprint lang-r'>3 -&gt; a</pre>
 
-</article></slide><slide class=''><hgroup><h2>Vetores</h2></hgroup><article  id="vetores-3" class="smaller ">
+<p>além da atribuição múltipla</p>
 
-<ul>
-<li>As funções dos tipos atômicos podem ser usadas na criação de vetores</li>
-</ul>
+<pre class = 'prettyprint lang-r'>b &lt;- a &lt;- 5
+5 -&gt; a -&gt; b</pre>
 
-<pre class = 'prettyprint lang-r'>numeric(5)</pre>
+</article></slide><slide class=''><hgroup><h2>Removendo variáveis</h2></hgroup><article  id="removendo-variaveis" class="smaller ">
 
-<pre >## [1] 0 0 0 0 0</pre>
+<p><code>rm</code> remove</p>
 
-<pre class = 'prettyprint lang-r'>integer(5)</pre>
+<pre class = 'prettyprint lang-r'>ls()</pre>
 
-<pre >## [1] 0 0 0 0 0</pre>
+<pre >[1] &quot;a&quot;      &quot;b&quot;      &quot;m&quot;      &quot;repl&lt;-&quot; &quot;v&quot;     </pre>
 
-<pre class = 'prettyprint lang-r'>character(5)</pre>
+<pre class = 'prettyprint lang-r'>rm(&#39;a&#39;)
+ls()</pre>
 
-<pre >## [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</pre>
+<pre >[1] &quot;b&quot;      &quot;m&quot;      &quot;repl&lt;-&quot; &quot;v&quot;     </pre>
 
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores" class="smaller ">
+</article></slide><slide class=''><hgroup><h2>Variáveis ocultas</h2></hgroup><article  id="variaveis-ocultas" class="smaller ">
 
-<h3>Vetores são homogêneos</h3>
+<p>Variáveis que iniciam com <code>.</code> são ocultas</p>
 
-<ul>
-<li>Todos os elementos em um vetor possuem o mesmo <code>mode</code></li>
-</ul>
+<pre class = 'prettyprint lang-r'>.hid &lt;- 3
+ls()</pre>
 
-<pre class = 'prettyprint lang-r'>mode(1:4)</pre>
+<pre >[1] &quot;b&quot;      &quot;m&quot;      &quot;repl&lt;-&quot; &quot;v&quot;     </pre>
 
-<pre >## [1] &quot;numeric&quot;</pre>
+<pre class = 'prettyprint lang-r'>ls(all.names=TRUE)</pre>
 
-<pre class = 'prettyprint lang-r'>mode(5)</pre>
+<pre >[1] &quot;.First&quot; &quot;.hid&quot;   &quot;b&quot;      &quot;m&quot;      &quot;repl&lt;-&quot; &quot;v&quot;     </pre>
 
-<pre >## [1] &quot;numeric&quot;</pre>
+</article></slide><slide class=''><hgroup><h2>Limpando o Ambiente</h2></hgroup><article  id="limpando-o-ambiente" class="smaller ">
 
-<pre class = 'prettyprint lang-r'>mode(integer(0))</pre>
+<p>Para limpar o ambiente <code>rm(list=ls())</code></p>
 
-<pre >## [1] &quot;numeric&quot;</pre>
+<pre class = 'prettyprint lang-r'>rm(list=ls())
+ls(all.names=TRUE)</pre>
 
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-1" class="smaller ">
+<pre >[1] &quot;.First&quot; &quot;.hid&quot;  </pre>
 
-<h3>Elemento <code>NA</code></h3>
+<p>ainda mantém as ocultas</p>
 
-<p><code>NA</code> é <code>logical</code>, mas se adapta ao tipo do vetor a que pertence</p>
+<pre class = 'prettyprint lang-r'>rm(list=ls(all.names=TRUE))
+ls(all.names=TRUE)</pre>
 
-<pre class = 'prettyprint lang-r'>mode(NA)</pre>
-
-<pre >## [1] &quot;logical&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>v &lt;- c(1, NA)
-mode(v)</pre>
-
-<pre >## [1] &quot;numeric&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>mode(v[2])</pre>
-
-<pre >## [1] &quot;numeric&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-2" class="smaller ">
-
-<h3>Vetores possuem comprimento (função <code>length</code>)</h3>
-
-<pre class = 'prettyprint lang-r'>length(1:4)</pre>
-
-<pre >## [1] 4</pre>
-
-<pre class = 'prettyprint lang-r'>length(5)</pre>
-
-<pre >## [1] 1</pre>
-
-<pre class = 'prettyprint lang-r'>length(integer(0))</pre>
-
-<pre >## [1] 0</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-3" class="smaller ">
-
-<h3>Indexação</h3>
-
-<ul>
-<li>Vetores podem ser indexados por posição</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v &lt;- c(21, 42, 63)
-v[1]</pre>
-
-<pre >## [1] 21</pre>
-
-<pre class = 'prettyprint lang-r'>v[3]</pre>
-
-<pre >## [1] 63</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-4" class="smaller ">
-
-<h3>Indexação</h3>
-
-<ul>
-<li>Vetores podem ser indexados por vetores de índices</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v[c(2, 3)]</pre>
-
-<pre >## [1] 42 63</pre>
-
-<pre class = 'prettyprint lang-r'>v[c(3, 1, 2)]</pre>
-
-<pre >## [1] 63 21 42</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-5" class="smaller ">
-
-<h3>Indexação</h3>
-
-<ul>
-<li>Vetores podem ser indexados por vetores de <code>logical</code></li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v[c(TRUE, FALSE, TRUE)]</pre>
-
-<pre >## [1] 21 63</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-6" class="smaller ">
-
-<h3>Indexação</h3>
-
-<ul>
-<li>Índices negativos retornam o vetor sem o elemento indexado</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v[-2]</pre>
-
-<pre >## [1] 21 63</pre>
-
-<pre class = 'prettyprint lang-r'>v[c(-1, -3)]</pre>
-
-<pre >## [1] 42</pre>
-
-<ul>
-<li>Não pode misturar índices negativos e positivos</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-7" class="smaller ">
-
-<h3>Vetores possuem nomes (função <code>names</code>)</h3>
-
-<pre class = 'prettyprint lang-r'>(v &lt;- c(21, 42, 63))</pre>
-
-<pre >## [1] 21 42 63</pre>
-
-<pre class = 'prettyprint lang-r'>names(v)</pre>
-
-<pre >## NULL</pre>
-
-<pre class = 'prettyprint lang-r'>names(v) &lt;- c(&quot;1M&quot;, &quot;2M&quot;, &quot;3M&quot;)
-v</pre>
-
-<pre >## 1M 2M 3M 
-## 21 42 63</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-8" class="smaller ">
-
-<ul>
-<li>Com elementos nomeados, o vetor pode ser indexado pelos nomes</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v[&quot;2M&quot;]</pre>
-
-<pre >## 2M 
-## 42</pre>
-
-<pre class = 'prettyprint lang-r'>v[c(&quot;1M&quot;, &quot;3M&quot;)]</pre>
-
-<pre >## 1M 3M 
-## 21 63</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-9" class="smaller ">
-
-<ul>
-<li>Indexação de elementos que não existem retorna <code>NA</code></li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>(v &lt;- 1:10)</pre>
-
-<pre >##  [1]  1  2  3  4  5  6  7  8  9 10</pre>
-
-<pre class = 'prettyprint lang-r'>v[11]</pre>
-
-<pre >## [1] NA</pre>
-
-<ul>
-<li>Atribuição de elementos fora do índices cria elementos <code>NA</code></li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v[20] &lt;- 2
-v</pre>
-
-<pre >##  [1]  1  2  3  4  5  6  7  8  9 10 NA NA NA NA NA NA NA NA NA  2</pre>
-
-</article></slide><slide class=''><hgroup><h2>Propriedades dos Vetores</h2></hgroup><article  id="propriedades-dos-vetores-10" class="smaller ">
-
-<ul>
-<li>Podemos concatenar elementos a um vetor com a função <code>c</code></li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>v &lt;- 1:5
-c(v, 1:3, -1, 15:22)</pre>
-
-<pre >##  [1]  1  2  3  4  5  1  2  3 -1 15 16 17 18 19 20 21 22</pre>
-
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Estruturas de dados: Listas</h2></hgroup><article  id="estruturas-de-dados-listas" class="smaller ">
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas" class="smaller ">
-
-<h3>Listas são heterogêneas</h3>
-
-<ul>
-<li>Listas podem acomodar objetos de diferentes tipos</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>(cid &lt;- list(&quot;Wilson Freitas&quot;, 38, as.Date(&#39;1976-07-12&#39;)))</pre>
-
-<pre >## [[1]]
-## [1] &quot;Wilson Freitas&quot;
-## 
-## [[2]]
-## [1] 38
-## 
-## [[3]]
-## [1] &quot;1976-07-12&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-1" class="smaller ">
-
-<h3>Listas também possuem nomes</h3>
-
-<pre class = 'prettyprint lang-r'>names(cid)</pre>
-
-<pre >## NULL</pre>
-
-<pre class = 'prettyprint lang-r'>names(cid) &lt;- c(&quot;nome&quot;, &quot;idade&quot;, &quot;nascimento&quot;)
-cid</pre>
-
-<pre >## $nome
-## [1] &quot;Wilson Freitas&quot;
-## 
-## $idade
-## [1] 38
-## 
-## $nascimento
-## [1] &quot;1976-07-12&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-2" class="smaller ">
-
-<ul>
-<li>Listas podem ser criadas diretamente com nomes</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>list(nome=&quot;Wilson Freitas&quot;, idade=38, nascimento=as.Date(&#39;1976-07-12&#39;))</pre>
-
-<pre >## $nome
-## [1] &quot;Wilson Freitas&quot;
-## 
-## $idade
-## [1] 38
-## 
-## $nascimento
-## [1] &quot;1976-07-12&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-3" class="smaller ">
-
-<h3>Indexação</h3>
-
-<ul>
-<li>Listas podem ser indexadas por posição e vetores de índices</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>cid[1]</pre>
-
-<pre >## $nome
-## [1] &quot;Wilson Freitas&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>cid[c(2, 3)]</pre>
-
-<pre >## $idade
-## [1] 38
-## 
-## $nascimento
-## [1] &quot;1976-07-12&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-4" class="smaller ">
-
-<h3>Indexação</h3>
-
-<ul>
-<li>Listas podem ser indexadas por nomes</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>cid[&#39;nome&#39;]</pre>
-
-<pre >## $nome
-## [1] &quot;Wilson Freitas&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>cid[c(&#39;idade&#39;, &#39;nascimento&#39;)]</pre>
-
-<pre >## $idade
-## [1] 38
-## 
-## $nascimento
-## [1] &quot;1976-07-12&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-5" class="smaller ">
-
-<ul>
-<li>O operador de indexação <code>[</code> de uma lista, retorna uma sublista</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>nome &lt;- cid[&#39;nome&#39;]
-is.list(nome)</pre>
-
-<pre >## [1] TRUE</pre>
-
-<ul>
-<li>Para acessar o conteúdo do elemento de uma lista devemos usar o operador <code>[[</code> ou <code>$</code></li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>cid[[&#39;nome&#39;]]</pre>
-
-<pre >## [1] &quot;Wilson Freitas&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>cid$nome</pre>
-
-<pre >## [1] &quot;Wilson Freitas&quot;</pre>
-
-<ul>
-<li>O operador <code>[[</code> não aceita múltiplos índices.</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-6" class="smaller ">
-
-<ul>
-<li>Podemos adicionar elementos a uma lista</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>cid$sapato &lt;- 42
-cid[[&#39;casado&#39;]] &lt;- TRUE
-cid</pre>
-
-<pre >## $nome
-## [1] &quot;Wilson Freitas&quot;
-## 
-## $idade
-## [1] 38
-## 
-## $nascimento
-## [1] &quot;1976-07-12&quot;
-## 
-## $sapato
-## [1] 42
-## 
-## $casado
-## [1] TRUE</pre>
-
-</article></slide><slide class=''><hgroup><h2>Listas</h2></hgroup><article  id="listas-7" class="smaller ">
-
-<ul>
-<li>Podemos concatenar uma elementos a uma lista sem alterá-la com a função <code>c</code></li>
-</ul>
-
-<pre class = 'prettyprint lang-r'>c(cid, filhos=2, paciência=0)</pre>
-
-<pre >## $nome
-## [1] &quot;Wilson Freitas&quot;
-## 
-## $idade
-## [1] 38
-## 
-## $nascimento
-## [1] &quot;1976-07-12&quot;
-## 
-## $sapato
-## [1] 42
-## 
-## $casado
-## [1] TRUE
-## 
-## $filhos
-## [1] 2
-## 
-## $paciência
-## [1] 0</pre>
-
-</article></slide><slide class=''><hgroup><h2>A função <code>c</code></h2></hgroup><article  id="a-funcao-c" class="smaller ">
-
-<ul>
-<li>Ela combina valores em um vetor ou uma lista
-
-<ul>
-<li>Para valores homogêneos ela retorna um vetor</li>
-<li>Para valores heterogêneos ela segue uma regra de precedência para coerção:</li>
-</ul></li>
-</ul>
-
-<pre >NULL &lt; raw &lt; logical &lt; integer &lt; double &lt; complex &lt; character &lt; list &lt; expression</pre>
-
-<pre class = 'prettyprint lang-r'>c(TRUE, FALSE, 10)</pre>
-
-<pre >## [1]  1  0 10</pre>
-
-<pre class = 'prettyprint lang-r'>c(TRUE, FALSE, 10, 1i)</pre>
-
-<pre >## [1]  1+0i  0+0i 10+0i  0+1i</pre>
-
-<pre class = 'prettyprint lang-r'>c(TRUE, FALSE, 10, 1i, &quot;n&quot;)</pre>
-
-<pre >## [1] &quot;TRUE&quot;  &quot;FALSE&quot; &quot;10&quot;    &quot;0+1i&quot;  &quot;n&quot;</pre>
-
-</article></slide><slide class=''><hgroup><h2>A função <code>c</code></h2></hgroup><article  id="a-funcao-c-1" class="smaller ">
-
-<pre class = 'prettyprint lang-r'>c(TRUE, FALSE, 10, 1i, &quot;n&quot;, list(5))</pre>
-
-<pre >## [[1]]
-## [1] TRUE
-## 
-## [[2]]
-## [1] FALSE
-## 
-## [[3]]
-## [1] 10
-## 
-## [[4]]
-## [1] 0+1i
-## 
-## [[5]]
-## [1] &quot;n&quot;
-## 
-## [[6]]
-## [1] 5</pre></article></slide>
+<pre >character(0)</pre>
+
+</article></slide><slide class=''><hgroup><h2>Investigando variáveis (1)</h2></hgroup><article  id="investigando-variaveis-1" class="smaller ">
+
+<p>Como o R executa um <em>shell</em> interativo, uma forma de investigar variáveis é imprimindo as</p>
+
+<pre class = 'prettyprint lang-r'>print(&quot;Wilson&quot;)</pre>
+
+<pre >[1] &quot;Wilson&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>print(print)</pre>
+
+<pre >function (x, ...) 
+UseMethod(&quot;print&quot;)
+&lt;bytecode: 0x7f835bcd3e40&gt;
+&lt;environment: namespace:base&gt;</pre>
+
+</article></slide><slide class=''><hgroup><h2>Investigando variáveis (2)</h2></hgroup><article  id="investigando-variaveis-2" class="smaller ">
+
+<p>Imprimir funções em R retorna o código</p>
+
+<pre class = 'prettyprint lang-r'>print(uniroot)</pre>
+
+<pre >function (f, interval, ..., lower = min(interval), upper = max(interval), 
+    f.lower = f(lower, ...), f.upper = f(upper, ...), extendInt = c(&quot;no&quot;, 
+        &quot;yes&quot;, &quot;downX&quot;, &quot;upX&quot;), check.conv = FALSE, tol = .Machine$double.eps^0.25, 
+    maxiter = 1000, trace = 0) 
+{
+    if (!missing(interval) &amp;&amp; length(interval) != 2L) 
+        stop(&quot;&#39;interval&#39; must be a vector of length 2&quot;)
+    if (!is.numeric(lower) || !is.numeric(upper) || lower &gt;= 
+        upper) 
+        stop(&quot;lower &lt; upper  is not fulfilled&quot;)
+    if (is.na(f.lower)) 
+        stop(&quot;f.lower = f(lower) is NA&quot;)
+    if (is.na(f.upper)) 
+        stop(&quot;f.upper = f(upper) is NA&quot;)
+    Sig &lt;- switch(match.arg(extendInt), yes = NULL, downX = -1, 
+        no = 0, upX = 1, stop(&quot;invalid &#39;extendInt&#39;; please report&quot;))
+    truncate &lt;- function(x) pmax.int(pmin(x, .Machine$double.xmax), 
+        -.Machine$double.xmax)
+    f.low. &lt;- truncate(f.lower)
+    f.upp. &lt;- truncate(f.upper)
+    doX &lt;- (is.null(Sig) &amp;&amp; f.low. * f.upp. &gt; 0 || is.numeric(Sig) &amp;&amp; 
+        (Sig * f.low. &gt; 0 || Sig * f.upp. &lt; 0))
+    if (doX) {
+        if (trace) 
+            cat(sprintf(&quot;search in [%g,%g]%s&quot;, lower, upper, 
+                if (trace &gt;= 2) 
+                  &quot;\n&quot;
+                else &quot; ... &quot;))
+        Delta &lt;- function(u) 0.01 * pmax(1e-04, abs(u))
+        it &lt;- 0L
+        if (is.null(Sig)) {
+            delta &lt;- Delta(c(lower, upper))
+            while (isTRUE(f.lower * f.upper &gt; 0) &amp;&amp; any(iF &lt;- is.finite(c(lower, 
+                upper)))) {
+                if ((it &lt;- it + 1L) &gt; maxiter) 
+                  stop(gettextf(&quot;no sign change found in %d iterations&quot;, 
+                    it - 1), domain = NA)
+                if (iF[1]) {
+                  ol &lt;- lower
+                  of &lt;- f.lower
+                  if (is.na(f.lower &lt;- f(lower &lt;- lower - delta[1], 
+                    ...))) {
+                    lower &lt;- ol
+                    f.lower &lt;- of
+                    delta[1] &lt;- delta[1]/4
+                  }
+                }
+                if (iF[2]) {
+                  ol &lt;- upper
+                  of &lt;- f.upper
+                  if (is.na(f.upper &lt;- f(upper &lt;- upper + delta[2], 
+                    ...))) {
+                    upper &lt;- ol
+                    f.upper &lt;- of
+                    delta[2] &lt;- delta[2]/4
+                  }
+                }
+                if (trace &gt;= 2) 
+                  cat(sprintf(&quot; .. modified lower,upper: (%15g,%15g)\n&quot;, 
+                    lower, upper))
+                delta &lt;- 2 * delta
+            }
+        }
+        else {
+            delta &lt;- Delta(lower)
+            while (isTRUE(Sig * f.lower &gt; 0)) {
+                if ((it &lt;- it + 1L) &gt; maxiter) 
+                  stop(gettextf(&quot;no sign change found in %d iterations&quot;, 
+                    it - 1), domain = NA)
+                f.lower &lt;- f(lower &lt;- lower - delta, ...)
+                if (trace &gt;= 2) 
+                  cat(sprintf(&quot; .. modified lower: %g\n&quot;, lower))
+                delta &lt;- 2 * delta
+            }
+            delta &lt;- Delta(upper)
+            while (isTRUE(Sig * f.upper &lt; 0)) {
+                if ((it &lt;- it + 1L) &gt; maxiter) 
+                  stop(gettextf(&quot;no sign change found in %d iterations&quot;, 
+                    it - 1), domain = NA)
+                f.upper &lt;- f(upper &lt;- upper + delta, ...)
+                if (trace &gt;= 2) 
+                  cat(sprintf(&quot; .. modified upper: %g\n&quot;, upper))
+                delta &lt;- 2 * delta
+            }
+        }
+        if (trace &amp;&amp; trace &lt; 2) 
+            cat(sprintf(&quot;extended to [%g, %g] in %d steps\n&quot;, 
+                lower, upper, it))
+    }
+    if (!isTRUE(as.vector(sign(f.lower) * sign(f.upper) &lt;= 0))) 
+        stop(if (doX) 
+            &quot;did not succeed extending the interval endpoints for f(lower) * f(upper) &lt;= 0&quot;
+        else &quot;f() values at end points not of opposite sign&quot;)
+    if (check.conv) {
+        val &lt;- tryCatch(.External2(C_zeroin2, function(arg) f(arg, 
+            ...), lower, upper, f.lower, f.upper, tol, as.integer(maxiter)), 
+            warning = function(w) w)
+        if (inherits(val, &quot;warning&quot;)) 
+            stop(&quot;convergence problem in zero finding: &quot;, conditionMessage(val))
+    }
+    else {
+        val &lt;- .External2(C_zeroin2, function(arg) f(arg, ...), 
+            lower, upper, f.lower, f.upper, tol, as.integer(maxiter))
+    }
+    iter &lt;- as.integer(val[2L])
+    if (iter &lt; 0) {
+        (if (check.conv) 
+            stop
+        else warning)(sprintf(ngettext(maxiter, &quot;_NOT_ converged in %d iteration&quot;, 
+            &quot;_NOT_ converged in %d iterations&quot;), maxiter), domain = NA)
+        iter &lt;- maxiter
+    }
+    if (doX) 
+        iter &lt;- iter + it
+    else it &lt;- NA_integer_
+    list(root = val[1L], f.root = f(val[1L], ...), iter = iter, 
+        init.it = it, estim.prec = val[3L])
+}
+&lt;bytecode: 0x7f835e2a4ed8&gt;
+&lt;environment: namespace:stats&gt;</pre>
+
+</article></slide><slide class=''><hgroup><h2>Investigando variáveis (3)</h2></hgroup><article  id="investigando-variaveis-3" class="smaller ">
+
+<p>Outra forma de investigar as variáveis é com a função <code>str</code></p>
+
+<pre class = 'prettyprint lang-r'>str(&quot;Wilson&quot;)</pre>
+
+<pre > chr &quot;Wilson&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>str(print)</pre>
+
+<pre >function (x, ...)  </pre>
+
+</article></slide><slide class=''><hgroup><h2>Investigando variáveis (4)</h2></hgroup><article  id="investigando-variaveis-4" class="smaller ">
+
+<p>Para investigar funções a função <code>args</code></p>
+
+<pre class = 'prettyprint lang-r'>args(c)</pre>
+
+<pre >function (..., recursive = FALSE) 
+NULL</pre>
+
+<pre class = 'prettyprint lang-r'>args(sd)</pre>
+
+<pre >function (x, na.rm = FALSE) 
+NULL</pre>
+
+</article></slide><slide class=''><hgroup><h2>Onde é que eu estou?</h2></hgroup><article  id="onde-e-que-eu-estou" class="smaller ">
+
+<p>A partir do instante em que foi incializado o R está no <em>working directory</em> (<code>wd</code>) e para descobri-lo use <code>getwd</code>:</p>
+
+<pre class = 'prettyprint lang-r'>getwd()</pre>
+
+<pre >[1] &quot;/Users/wilson/dev/Curso-Intro-R&quot;</pre>
+
+<p>para mudar <code>setwd</code>:</p>
+
+<pre class = 'prettyprint lang-r'>setwd(&#39;~&#39;)
+getwd()</pre>
+
+<pre >[1] &quot;/Users/wilson&quot;</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
