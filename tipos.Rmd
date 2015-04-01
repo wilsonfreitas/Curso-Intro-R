@@ -2,9 +2,10 @@
 title: "Tipos de dados em R"
 author: "Wilson Freitas"
 output:
+  slidy_presentation: default
   ioslides_presentation:
-    smaller: true
-    widescreen: true
+    smaller: yes
+    widescreen: yes
 ---
 
 # Tudo é Objeto

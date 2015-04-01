@@ -1,7 +1,7 @@
 ---
 title: "Indexação no R"
 author: "Wilson Freitas"
-output: ioslides_presentation
+output: slidy_presentation
 ---
 
 ## Introdução
